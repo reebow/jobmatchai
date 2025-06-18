@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobMatch AI - Find Your Dream Job</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .hero-bg {
+            background-color: #e9eafc; /* A light purple-blue similar to the mockup */
+        }
+        .brand-purple {
+            color: #6366f1;
+        }
+        .btn-primary {
+            background-color: #6366f1;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #4f46e5;
+        }
+
+        /* Loading overlay styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .spinner {
+            border: 4px solid rgba(99, 102, 241, 0.3);
+            border-top: 4px solid #6366f1;
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Consolidated styles for enabled/disabled button states */
+        .btn-primary.enabled {
+            opacity: 1;
+            cursor: pointer;
+        }
+        .btn-primary.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Add a class to hide elements */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+<!--
+  Header Navigation
+  Using Thymeleaf for dynamic links. In a real app, these would point to different routes.
+-->
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50">
+    <nav class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+            <div class="text-2xl font-bold text-gray-800">
+                <a th:href="@{/}" href="#">JobMatch AI</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#how-it-works" class="text-gray-600 hover:text-indigo-600">How it works</a>
+                <a href="#get-started" class="btn-primary text-white font-semibold px-5 py-2.5 rounded-lg shadow-md">Get started</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+
+    <!--
+      How It Works Section
+      Using th:each to iterate over a list of 'features'.
+    -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-lg font-semibold brand-purple uppercase">How it works</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Streamlining Your Job Search</h3>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
+                    Finding the right job in a large company can be overwhelming. Our app simplifies the process, ensuring you find the perfect fit.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="p-8 bg-gray-50 rounded-xl text-center">
+                    <div class="flex items-center justify-center h-16 w-16 bg-indigo-100 rounded-full mx-auto mb-6">
+                        <svg class="h-8 w-8 brand-purple" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">AI-Powered Job Search</h4>
+                    <p class="text-gray-600">Our AI agents analyze your resume and career aspirations to find the best job matches.</p>
+                </div>
+                <div class="p-8 bg-gray-50 rounded-xl text-center">
+                    <div class="flex items-center justify-center h-16 w-16 bg-indigo-100 rounded-full mx-auto mb-6">
+                        <svg class="h-8 w-8 brand-purple"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Resume Analysis</h4>
+                    <p class="text-gray-600">Upload your resume to let our AI understand your skills and experience.</p>
+                </div>
+                <div class="p-8 bg-gray-50 rounded-xl text-center">
+                    <div class="flex items-center justify-center h-16 w-16 bg-indigo-100 rounded-full mx-auto mb-6">
+                        <svg class="h-8 w-8 brand-purple" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Personalized Matching</h4>
+                    <p class="text-gray-600">Get matched with roles that align with your career goals and qualifications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+      Future Enhancements Section
+    -->
+    <section id="future-enhancements" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-lg font-semibold brand-purple uppercase">Future Enhancements</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">More Features Coming Soon</h3>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
+                    We're constantly improving our app to provide you with the best job search experience. Stay tuned for these exciting new features.
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Feature Card 1 -->
+                <div class="p-8 bg-white rounded-xl">
+                    <div class="flex items-center justify-center h-12 w-12 bg-indigo-100 rounded-full mb-5">
+                        <svg class="h-6 w-6 brand-purple" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Direct Application via Agent</h4>
+                    <p class="text-gray-600">Apply for jobs directly through our app with the help of an AI agent.</p>
+                </div>
+                <!-- Feature Card 2 -->
+                <div class="p-8 bg-white rounded-xl">
+                    <div class="flex items-center justify-center h-12 w-12 bg-indigo-100 rounded-full mb-5">
+                        <svg class="h-6 w-6 brand-purple" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Automated Form Filling</h4>
+                    <p class="text-gray-600">Our agent will automatically fill out application forms, saving you time and effort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+      Get Started Form Section
+      Uses th:action, th:object, and th:field for form binding in Thymeleaf.
+      th:if can be used to display validation errors.
+    -->
+    <section id="get-started" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Get Started</h2>
+                </div>
+
+                <form th:action="@{/resume-matcher}" method="post" enctype="multipart/form-data" class="space-y-6">
+                    <div>
+                        <label for="aspirations" class="block text-sm font-medium text-gray-700 mb-2">Describe your career aspirations (optional)</label>
+                        <textarea id="aspirations" name="aspirations" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., 'I want to become a senior product manager in a fast-paced tech company...'"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="resume" class="block text-sm font-medium text-gray-700 mb-2">Upload your resume</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1 text-center">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div class="flex text-sm text-gray-600">
+                                    <label for="resume-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                        <span>Upload a file</span>
+                                        <input id="resume-upload" name="resume" type="file" class="sr-only" onchange="handleFileSelect(event)">
+                                    </label>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p id="file-name" class="text-xs text-gray-500">PDF, DOC, DOCX up to 10MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button id="submit-button" type="submit" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!--
+      Results Section
+      Displays the job match result or a placeholder message.
+    -->
+    <section id="results" class="py-20 bg-gray-50 hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Results</h2>
+                </div>
+                <div id="markdown-result" class="bg-white p-6 rounded-lg shadow-md">
+                    <!-- Rendered markdown will appear here -->
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!--
+  Footer
+-->
+<footer class="bg-gray-800 text-gray-400 py-12">
+    <div class="container mx-auto px-6 text-center">
+        <div class="flex justify-center space-x-6 mb-4">
+            <a href="https://www.linkedin.com/in/tim-rutana/" class="hover:text-white" target="_blank" rel="noopener">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+            </a>
+        </div>
+        <p th:text="|&copy; ${#dates.year(#dates.createNow())} JobMatch AI. All rights reserved.|">&copy; 2024 JobMatch AI. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Ensure the marked.js script is loaded before the custom script -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script>
+
+    function handleFileSelect(event) {
+        const fileInput = event.target;
+        const fileNameElement = document.getElementById('file-name');
+        const submitButton = document.getElementById('submit-button');
+
+        if (fileInput.files && fileInput.files.length > 0) {
+            const fileName = fileInput.files[0].name;
+            fileNameElement.textContent = `Selected file: ${fileName}`;
+            fileNameElement.classList.add('text-green-500');
+            fileNameElement.classList.remove('text-gray-500');
+            submitButton.disabled = false;
+            submitButton.classList.add('enabled');
+            submitButton.classList.remove('disabled');
+        } else {
+            fileNameElement.textContent = 'PDF, DOC, DOCX up to 10MB';
+            fileNameElement.classList.add('text-gray-500');
+            fileNameElement.classList.remove('text-green-500');
+            submitButton.disabled = true;
+            submitButton.classList.add('disabled');
+            submitButton.classList.remove('enabled');
+        }
+    }
+
+    function scrollToResults() {
+        const resultSection = document.getElementById('results');
+        if (resultSection) {
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function showLoadingOverlay() {
+        const overlay = document.createElement('div');
+        overlay.id = 'loading-overlay';
+        overlay.className = 'loading-overlay';
+        overlay.innerHTML = '<div class="spinner"></div>';
+        document.body.appendChild(overlay);
+    }
+
+    function removeLoadingOverlay() {
+        const overlay = document.getElementById('loading-overlay');
+        if (overlay) {
+            document.body.removeChild(overlay);
+        }
+    }
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const resultSection = document.getElementById('results');
+        const markdownResult = document.getElementById('markdown-result');
+
+        // Hide the result section initially
+        resultSection.classList.add('hidden');
+
+        showLoadingOverlay();
+
+        fetch('/resume-matcher', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            removeLoadingOverlay();
+            if (data.result) {
+                // Show the result section and render the markdown
+                resultSection.classList.remove('hidden');
+                markdownResult.innerHTML = marked.parse(data.result);
+            } else {
+            }
+            scrollToResults();
+        })
+        .catch(error => {
+            removeLoadingOverlay();
+            console.error('Error:', error);
+            alert('An error occurred while processing your request. Please try again.');
+        });
+    }
+
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+    }
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.0'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'dev.rutana'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'com.google.adk:google-adk:0.1.0'
+    implementation 'com.google.adk:google-adk-dev:0.1.0'
+    implementation 'com.google.firebase:firebase-admin:9.5.0'
+	implementation 'org.apache.tika:tika-core:3.2.0'
+	runtimeOnly 'org.apache.tika:tika-parsers-standard-package:3.2.0'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+// Ensure that the protobuf version is compatible with the Google ADK from Firebase
+configurations.all {
+	resolutionStrategy {
+		force 'com.google.protobuf:protobuf-java:3.25.5'
+		force 'com.google.protobuf:protobuf-java-util:3.25.5'
+		exclude group: 'com.google.protobuf', module: 'protobuf-javalite'
+	}
+}
+
+tasks.register('runADKServer', JavaExec) {
+	dependsOn 'classes'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.google.adk.web.AdkWebServer'
+	args '--adk.agents.source-dir=src/main/java/dev/rutana/resumematcher/agents', '--server.port=8080'
+}

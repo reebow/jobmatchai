@@ -1,0 +1,79 @@
+Mateo García
++52 55 1234 5678 | mateo.garcia@email.com | linkedin.com/in/mateogarcia | Mexico City, Mexico
+
+Summary
+Highly accomplished and results-oriented Senior Software Engineer with 6 years of experience in designing, developing, and optimizing large-scale infrastructure, distributed systems, and backend services. Proficient in C++, Python, and Java, with a strong command of data structures, algorithms, and performance optimization. Proven ability to lead complex projects, troubleshoot critical production issues, and build scalable solutions that enhance system reliability and developer productivity. Eager to contribute expertise to Google's Core Infrastructure team.
+
+Experience
+Senior Software Engineer | Tech Innovations Inc., Mexico City, Mexico
+October 2021 – Present
+
+Led the design and implementation of a new distributed messaging queue service in C++, reducing cross-service communication latency by 30% and increasing throughput by 25% for core business operations.
+
+Architected and developed large-scale data ingestion pipelines using Python and Apache Flink, processing over 50TB of raw data daily for analytical insights, significantly improving data freshness.
+
+Managed the end-to-end lifecycle of critical infrastructure components, including deployment, monitoring, and scaling, ensuring 99.99% uptime.
+
+Implemented advanced debugging tools and automated health checks for core services, proactively identifying and resolving issues before impacting users.
+
+Mentored junior engineers and conducted code reviews, ensuring adherence to best practices and high-quality code standards.
+
+Participated in a weekly on-call rotation, effectively diagnosing and resolving complex distributed system failures, and improving mean time to recovery (MTTR) by 20%.
+
+Software Engineer | Global Solutions Group, Mexico City, Mexico
+July 2019 – September 2021
+
+Developed and maintained backend APIs for a high-traffic e-commerce platform using Java and Spring Boot, serving over 1 million daily active users.
+
+Optimized database queries and indexing strategies for a large PostgreSQL cluster, resulting in a 40% reduction in query latency for critical operations.
+
+Contributed to the design of a new network load balancing solution, enhancing system resilience and fault tolerance.
+
+Applied advanced data structures and algorithms to optimize search and recommendation engines, improving result relevance.
+
+Wrote comprehensive unit, integration, and end-to-end tests, improving code coverage by 15% and reducing production bugs.
+
+Junior Software Developer | Innovate Solutions, Mexico City, Mexico
+August 2018 – June 2019
+
+Assisted in the development of a cloud-based storage solution, focusing on data consistency and retrieval efficiency.
+
+Gained foundational experience in Python for scripting and automation of development workflows.
+
+Collaborated with senior engineers on system integrations and resolved initial client issues.
+
+Technical Skills
+Programming Languages: C++, Python, Java, Go
+
+Infrastructure & Systems: Distributed Systems, Microservices, Large-Scale Infrastructure, Networking, Data Storage, Concurrency, APIs, Load Balancing, Cloud Computing (GCP)
+
+Databases: PostgreSQL, MySQL, Apache Cassandra, Redis
+
+Tools & Technologies: Git, Docker, Kubernetes, Prometheus, Grafana, Jenkins, GDB, Valgrind, Jira
+
+Concepts: Data Structures, Algorithms, System Design, Performance Tuning, Debugging, Software Test Engineering, Site Reliability Engineering (SRE), Privacy-Preserving Techniques
+
+Education
+Master of Science in Computer Science | National Autonomous University of Mexico (UNAM), Mexico City, Mexico
+May 2018
+
+Thesis: "Scalable Architectures for Real-time Data Stream Processing"
+
+Bachelor of Science in Computer Science | Monterrey Institute of Technology and Higher Education (Tec de Monterrey), Monterrey, Mexico
+May 2017
+
+Relevant coursework: Advanced Algorithms, Operating Systems, Computer Networks, Distributed Computing
+
+Projects
+Distributed Debugging Framework (Personal Project) | [Link to GitHub/Portfolio - optional]
+
+Developed a prototype distributed debugging framework in Python, simulating trace collection and aggregation from multiple service instances.
+
+Explored privacy-preserving data access mechanisms for debug data, demonstrating a potential reduction in data exposure.
+
+Automated System Health Reporter | [Link to GitHub/Portfolio - optional]
+
+Built a Python application to automatically collect and visualize system health metrics from various infrastructure services, providing actionable insights to operations teams.
+
+Awards & Recognition
+"Engineer of the Quarter" - Tech Innovations Inc. (Q2 2023) - Recognized for outstanding contributions to the distributed messaging queue project.
