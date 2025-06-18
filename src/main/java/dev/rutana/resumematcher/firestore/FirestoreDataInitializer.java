@@ -12,7 +12,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// @Component
+@Component
 public class FirestoreDataInitializer implements CommandLineRunner {
 
     private final Firestore firestore;
